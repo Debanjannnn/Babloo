@@ -36,7 +36,7 @@ const AutoSuggest: React.FC<AutoSuggestProps> = ({
     if (text.length >= minQueryLength) {
       try {
         const response = await axios.get(
-          `https://api.olamaps.io/places/v1/autocomplete?input=${text}&api_key=ELYYqxMExuYrhaYoGf4UxPF7nKSzvElHTAqDY3em`
+          `https://api.olamaps.io/places/v1/autocomplete?input=${text}&api_key=""`
         );
         const predictions = response.data.predictions || [];
         setSuggestions(predictions);

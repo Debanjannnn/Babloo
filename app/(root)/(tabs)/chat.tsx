@@ -19,7 +19,7 @@ const Chat = () => {
             No Messages Yet
           </Text>
           <Text className="text-base mt-2 text-center px-7">
-            Start a conversation with your friends and family
+            Start a conversation with your mechanic
           </Text>
         </View>
       </ScrollView>
