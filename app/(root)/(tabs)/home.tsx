@@ -20,6 +20,7 @@ import { icons, images } from "@/constants";
 import { useFetch } from "@/lib/fetch";
 import { useLocationStore } from "@/store";
 import { Ride } from "@/types/type";
+import AutoSuggest from "@/components/OLAautoComplete";
 
 const Home = () => {
   const { user } = useUser();
@@ -115,11 +116,14 @@ const Home = () => {
               </TouchableOpacity>
             </View>
 
-            <GoogleTextInput
-              icon={icons.search}
-              containerStyle="bg-white shadow-md shadow-neutral-300"
-              handlePress={handleDestinationPress}
-            />
+
+             <AutoSuggest
+               placeholder="Enter your destination..."
+               icon={icons.search}
+               containerStyle="bg-white shadow-md shadow-neutral-300"
+               handlePress={handleDestinationPress}
+             />
+
 
             <>
               <Text className="text-xl font-JakartaBold mt-5 mb-3">

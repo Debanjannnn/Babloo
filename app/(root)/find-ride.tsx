@@ -18,7 +18,7 @@ const FindRide = () => {
   return (
     <RideLayout title="Ride">
       <View className="my-3">
-        <Text className="text-lg font-JakartaSemiBold mb-3">From</Text>
+        <Text className="text-lg font-JakartaSemiBold mb-3">Current Location</Text>
 
         <GoogleTextInput
           icon={icons.target}
@@ -29,17 +29,7 @@ const FindRide = () => {
         />
       </View>
 
-      <View className="my-3">
-        <Text className="text-lg font-JakartaSemiBold mb-3">To</Text>
-
-        <GoogleTextInput
-          icon={icons.map}
-          initialLocation={destinationAddress!}
-          containerStyle="bg-neutral-100"
-          textInputBackgroundColor="transparent"
-          handlePress={(location) => setDestinationLocation(location)}
-        />
-      </View>
+     
 
       <CustomButton
         title="Find Now"
