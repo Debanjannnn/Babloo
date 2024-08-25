@@ -74,27 +74,23 @@ export const icons = {
 export const onboarding = [
   {
     id: 1,
-    title: "The perfect ride is just a tap away!",
+    title: "Quick Assistance, Just a Tap Away!",
     description:
-      "Your journey begins with Ryde. Find your ideal ride effortlessly.",
+      "Start your journey with Babloo. Easily find the mechanic you need, whenever you need it.",
     image: images.onboarding1,
   },
   {
     id: 2,
-    title: "Best car in your hands with Ryde",
+    title: "Top Mechanics at Your Fingertips",
     description:
-      "Discover the convenience of finding your perfect ride with Ryde",
+      "Experience the ease of connecting with trusted mechanics through Babloo.",
     image: images.onboarding2,
   },
   {
     id: 3,
-    title: "Your ride, your way. Let's go!",
+    title: "Select Your Preferred Mechanic",
     description:
-      "Enter your destination, sit back, and let us take care of the rest.",
+      "Enter your location, tap 'Help,' and we'll handle the rest to get you back on the road.",
     image: images.onboarding3,
   },
 ];
-
-export const data = {
-  onboarding,
-};
