@@ -72,7 +72,7 @@ As co-founders, we're dedicated to building a community where both drivers and m
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/Babloo.git
+   git clone https://github.com/Debanjannnn/Babloo.git
    ```
 2. Navigate to the project directory:
    ```bash
