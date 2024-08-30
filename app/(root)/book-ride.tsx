@@ -67,13 +67,6 @@ const BookRide = () => {
                 {formatTime(driverDetails?.time!)}
               </Text>
             </View>
-
-            <View className="flex flex-row items-center justify-between w-full py-3">
-              <Text className="text-lg font-JakartaRegular">Car Seats</Text>
-              <Text className="text-lg font-JakartaRegular">
-                {driverDetails?.car_seats}
-              </Text>
-            </View>
           </View>
 
           <View className="flex flex-col w-full items-start justify-center mt-5">

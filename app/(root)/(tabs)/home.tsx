@@ -115,11 +115,11 @@ const Home = () => {
               </TouchableOpacity>
             </View>
 
-            <GoogleTextInput
-              icon={icons.search}
-              containerStyle="bg-white shadow-md shadow-neutral-300"
-              handlePress={handleDestinationPress}
-            />
+            <TouchableOpacity
+            onPress={() => router.push("/(root)/find-ride")}
+            className="flex items-center justify-between p-4 rounded-2xl  bg-blue-600 ">
+           <Text className="text-white text-lg font-medium">HELP</Text>
+           </TouchableOpacity>
 
             <>
               <Text className="text-xl font-JakartaBold mt-5 mb-3">
@@ -129,9 +129,12 @@ const Home = () => {
                 <Map />
               </View>
             </>
+             
+
+
 
             <Text className="text-xl font-JakartaBold mt-5 mb-3">
-              Recent Rides
+              Recent Services
             </Text>
           </>
         }

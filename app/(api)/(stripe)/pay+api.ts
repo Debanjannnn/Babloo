@@ -1,40 +1,54 @@
 import { Stripe } from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2024-06-20" });
 
 export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const { payment_method_id, payment_intent_id, customer_id, client_secret } =
-      body;
+  const body = await request.json();
+  const { name, email, amount } = body;
 
-    if (!payment_method_id || !payment_intent_id || !customer_id) {
-      return new Response(
-        JSON.stringify({ error: "Missing required fields" }),
-        { status: 400 },
-      );
-    }
-
-    const paymentMethod = await stripe.paymentMethods.attach(
-      payment_method_id,
-      { customer: customer_id },
-    );
-
-    const result = await stripe.paymentIntents.confirm(payment_intent_id, {
-      payment_method: paymentMethod.id,
-    });
-
+  if (!name || !email || !amount) {
     return new Response(
-      JSON.stringify({
-        success: true,
-        message: "Payment successful",
-        result: result,
-      }),
+      JSON.stringify({ error: "Missing required fields" }),
+      { status: 400 }
     );
-  } catch (error) {
-    console.error("Error paying:", error);
-    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
-      status: 500,
-    });
   }
+
+  let customer;
+  const doesCustomerExist = await stripe.customers.list({
+    email,
+  });
+
+  if (doesCustomerExist.data.length > 0) {
+    customer = doesCustomerExist.data[0];
+  } else {
+    const newCustomer = await stripe.customers.create({
+      name,
+      email,
+    });
+
+    customer = newCustomer;
+  }
+
+  const ephemeralKey = await stripe.ephemeralKeys.create(
+    { customer: customer.id },
+    { apiVersion: "2024-06-20" }
+  );
+
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: parseInt(amount) * 100,  // Amount in paise for INR
+    currency: "inr",
+    customer: customer.id,
+    automatic_payment_methods: {
+      enabled: true,
+    },
+  });
+
+  return new Response(
+    JSON.stringify({
+      paymentIntent: paymentIntent.client_secret,  // Only the client secret is needed on the frontend
+      ephemeralKey: ephemeralKey.secret,
+      customer: customer.id,
+    }),
+    { status: 200 }
+  );
 }

@@ -6,7 +6,6 @@ declare interface Driver {
   last_name: string;
   profile_image_url: string;
   car_image_url: string;
-  car_seats: number;
   rating: number;
 }
 
@@ -17,7 +16,6 @@ declare interface MarkerData {
   title: string;
   profile_image_url: string;
   car_image_url: string;
-  car_seats: number;
   rating: number;
   first_name: string;
   last_name: string;
@@ -34,14 +32,13 @@ declare interface MapProps {
 }
 
 declare interface Ride {
+  driver_longitude: number;
+  driver_latitude: number;
   id: string;
   origin_address: string;
   destination_address: string;
   origin_latitude: number;
   origin_longitude: number;
-  destination_latitude: number;
-  destination_longitude: number;
-  ride_time: number;
   fare_price: number;
   payment_status: string;
   driver_id: number;
@@ -50,7 +47,7 @@ declare interface Ride {
   driver: {
     first_name: string;
     last_name: string;
-    car_seats: number;
+    // car_seats has been removed
   };
 }
 
@@ -95,7 +92,7 @@ declare interface PaymentProps {
   email: string;
   amount: string;
   driverId: number;
-  rideTime: number;
+  rideTime: number;  // Adjust based on the requirement
 }
 
 declare interface LocationStore {

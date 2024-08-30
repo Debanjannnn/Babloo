@@ -5,12 +5,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const {
       origin_address,
-      destination_address,
       origin_latitude,
       origin_longitude,
-      destination_latitude,
-      destination_longitude,
-      ride_time,
       fare_price,
       payment_status,
       driver_id,
@@ -19,19 +15,15 @@ export async function POST(request: Request) {
 
     if (
       !origin_address ||
-      !destination_address ||
       !origin_latitude ||
       !origin_longitude ||
-      !destination_latitude ||
-      !destination_longitude ||
-      !ride_time ||
       !fare_price ||
       !payment_status ||
       !driver_id ||
       !user_id
     ) {
-      return Response.json(
-        { error: "Missing required fields" },
+      return new Response(
+        JSON.stringify({ error: "Missing required fields" }),
         { status: 400 },
       );
     }
@@ -41,24 +33,16 @@ export async function POST(request: Request) {
     const response = await sql`
       INSERT INTO rides ( 
           origin_address, 
-          destination_address, 
           origin_latitude, 
           origin_longitude, 
-          destination_latitude, 
-          destination_longitude, 
-          ride_time, 
           fare_price, 
           payment_status, 
           driver_id, 
           user_id
       ) VALUES (
           ${origin_address},
-          ${destination_address},
           ${origin_latitude},
           ${origin_longitude},
-          ${destination_latitude},
-          ${destination_longitude},
-          ${ride_time},
           ${fare_price},
           ${payment_status},
           ${driver_id},
@@ -67,9 +51,9 @@ export async function POST(request: Request) {
       RETURNING *;
     `;
 
-    return Response.json({ data: response[0] }, { status: 201 });
+    return new Response(JSON.stringify({ data: response[0] }), { status: 201 });
   } catch (error) {
-    console.error("Error inserting data into recent_rides:", error);
-    return Response.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error("Error inserting data into rides:", error);
+    return new Response(JSON.stringify({ error: "Internal Server Error" }), { status: 500 });
   }
 }
