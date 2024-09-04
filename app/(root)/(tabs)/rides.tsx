@@ -37,7 +37,7 @@ const Rides = () => {
                   alt="No recent rides found"
                   resizeMode="contain"
                 />
-                <Text className="text-sm">No recent rides found</Text>
+                <Text className="text-sm">No recent Services found</Text>
               </>
             ) : (
               <ActivityIndicator size="small" color="#000" />
